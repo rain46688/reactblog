@@ -11,7 +11,9 @@ function App() {
   // 앞에는 state 저장한 변수가 담겨지고, 뒤에 변수에는 함수가 담겨짐
  // let [a,b] = [1,2] destructuring 문법이있다고함 a에1이 들어가고 b에 2가 들어감
  // useState하면 저런 형식으로 데이터가 남게되고 해당 방식으로 담겨짐
- 
+
+ let [따봉, 따봉변경] = useState(0);
+
 
   return (
     <div className="App">
@@ -23,8 +25,9 @@ function App() {
         <h4 style={{color : 'red', fontSize : '16px'}}>{ blog }</h4>
       </div>
      
-      <div className="list">
-        <h4>{ 글제목[0] }</h4>
+      <div className="list" onClick={() => {b(['여자 코트 추천','여자 코드 추천','남자 가디건 추천'])}}>
+        {/* 추천 버튼 클릭하면 +1되게 하기 state는 =로 사용해서 증가시키면 안됨! */}
+        <h4>{ 글제목[0] }  <span onClick={ () =>{ 따봉변경(따봉+1) } }>👍</span> { 따봉 }</h4>
         <p>2월 17일 발행</p>
       </div>
 
