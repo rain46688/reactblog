@@ -56,8 +56,23 @@ function App() {
         <p>2월 17일 발행</p>
       </div>
 
+      {/* 컴포넌트 출력 */}
+      <Modal/>
+
     </div>
   );
+}
+
+// 리액트 컴포넌트 사용법 App 밖에 함수 생성, 대문자로 생성해야됨
+// 다른 함수에서는 당연하지만 state나 변수 선언한거 못가져옴
+function Modal(){
+  return (
+    <div className="modal">
+        <h4>제목</h4>
+        <p>날짜</p>
+        <p>상세내용</p>
+      </div>
+  )
 }
 
 export default App;
