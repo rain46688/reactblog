@@ -90,7 +90,7 @@ function App() {
       console.log(입력값);}} value={입력값}/>
       <button onClick={()=>{
         let copy = [...글제목];
-        copy.push({title : 입력값,
+        copy.unshift({title : 입력값,
         thumdup : 0,});
         글제목변경(copy);
         입력값변경('');
