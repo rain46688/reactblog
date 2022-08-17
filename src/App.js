@@ -80,10 +80,10 @@ function App() {
       {/* 컴포넌트 출력 
       if문을 사용못하기 때문에 삼항연산자를 이용해서 넣음 null은 아무것도 없는것
       부모에서 자식으로 state를 넘겨주려면 props를 사용해야된다.
-      여러개를 넘겨줄수도있음
+      여러개를 넘겨줄수도있음, 변수명 말고 함수들도 그냥 전송 가능
       */}
       {
-        modal == true ? <Modal index={index} 글제목={글제목}/> : null
+        modal == true ? <Modal 글제목변경={글제목변경} index={index} 글제목={글제목}/> : null
       }
 
     </div>
@@ -99,6 +99,11 @@ function Modal(props){
         <h4>{props.글제목[props.index].title}</h4>
         <p>날짜</p>
         <p>상세내용</p>
+        <button onClick={()=>{
+           let copy =[...props.글제목];
+           copy[props.index].title = '여자 코트 추천';
+           props.글제목변경(copy);
+        }}>글수정</button>
       </div>
   )
 }
