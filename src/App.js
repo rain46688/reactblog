@@ -19,6 +19,7 @@ function App() {
 
  let [modal, setModal] = useState(false);
  let [index, setIndex] = useState(0);
+ let [입력값, 입력값변경] = useState('');
 
   return (
     <div className="App">
@@ -65,17 +66,38 @@ function App() {
             <h4 onClick={()=>{
           modal == true ? setModal(false) : setModal(true);
           setIndex(i);
-        }}>{ 글제목[i].title }</h4>
-            <span onClick={ () =>{ 
-              let copy = [...글제목];
-              copy[i].thumdup++;
-              글제목변경(copy);
-             } }>👍</span> { 글제목[i].thumdup }
+        }}>{ 글제목[i].title }<span onClick={ (e) =>{ 
+          // e.stopPropagation(); 사용하면 이벤트가 상위 html로 퍼지는 이벤트버블링을 막아줘서
+          // span 태그를 누른다고 상세 모달창이 뜨거나 하지 않고 추천 숫자만 올라감
+          e.stopPropagation();
+          let copy = [...글제목];
+          copy[i].thumdup++;
+          글제목변경(copy);
+         } }>👍</span> { 글제목[i].thumdup }
+         <button onClick={(e)=>{
+           e.stopPropagation();
+           let copy = [...글제목];
+           copy.splice(i,1);
+           글제목변경(copy);
+         }}>글삭제</button></h4>
             <p>2월 17일 발행</p>
           </div>
           )
         })
       }
+
+      <input onChange={(e)=>{입력값변경(e.target.value);
+      console.log(입력값);}} value={입력값}/>
+      <button onClick={()=>{
+        let copy = [...글제목];
+        copy.push({title : 입력값,
+        thumdup : 0,});
+        글제목변경(copy);
+        입력값변경('');
+      }}>글등록</button>
+      {/* 이렇게 출력하면 처음 입력하면 빈값나오고 다음부터는 잘 나옴 이유는
+      비동기 처리를해서 변경되기 전에 첫번째는 콘솔로그가 찍혀서 그렇다함*/}
+      
 
       {/* 컴포넌트 출력 
       if문을 사용못하기 때문에 삼항연산자를 이용해서 넣음 null은 아무것도 없는것
