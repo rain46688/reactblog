@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 function App() {
 
@@ -107,6 +107,7 @@ function App() {
       {
         modal == true ? <Modal 글제목변경={글제목변경} index={index} 글제목={글제목}/> : null
       }
+      <Modal2 index = {index}/>
 
     </div>
   );
@@ -128,6 +129,29 @@ function Modal(props){
         }}>글수정</button>
       </div>
   )
+}
+
+// 옛날 방식의 리엑트에서 컴포넌트 사용법
+// 첨에 내가 배웠을때 이렇게 했었음 props는 constructor랑 super에 넣고 사용하면됨
+class Modal2 extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      name : 'kim',
+      age : 20
+    }
+  }
+
+  render(){
+    return (
+      // this. 으로 가져와야됨!
+      <div>안녕 {this.state.age}<button onClick={()=>{
+        this.setState({age : this.props.index})
+      }}>버튼</button></div>
+    )
+  }
+  
+
 }
 
 export default App;
