@@ -13,6 +13,7 @@ function App() {
  // useState하면 저런 형식으로 데이터가 남게되고 해당 방식으로 담겨짐
 
  let [따봉, 따봉변경] = useState(0);
+ let [modal, setModal] = useState(false);
 
 
   return (
@@ -42,7 +43,9 @@ function App() {
      
       <div className="list">
         {/* 추천 버튼 클릭하면 +1되게 하기 state는 =로 사용해서 증가시키면 안됨! */}
-        <h4>{ 글제목[0] }  <span onClick={ () =>{ 따봉변경(따봉+1) } }>👍</span> { 따봉 }</h4>
+        <h4 onClick={()=>{
+          modal == true ? setModal(false) : setModal(true)
+        }}>{ 글제목[0] }  <span onClick={ () =>{ 따봉변경(따봉+1) } }>👍</span> { 따봉 }</h4>
         <p>2월 17일 발행</p>
       </div>
 
@@ -56,8 +59,12 @@ function App() {
         <p>2월 17일 발행</p>
       </div>
 
-      {/* 컴포넌트 출력 */}
-      <Modal/>
+      {/* 컴포넌트 출력 
+      if문을 사용못하기 때문에 삼항연산자를 이용해서 넣음 null은 아무것도 없는것
+      */}
+      {
+        modal == true ? <Modal/> : null
+      }
 
     </div>
   );
